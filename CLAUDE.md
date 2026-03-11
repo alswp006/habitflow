@@ -161,9 +161,8 @@ import { cn } from "@/lib/utils"                    // Class merging: cn("base",
 - API client auto-attaches auth token to requests
 - For protected screens: check auth.isAuthenticated in component
 
-## Navigation (already configured)
-- Tab layout at app/(tabs)/_layout.tsx
-- Stack navigation at app/_layout.tsx
-- Add new tabs: create file in app/(tabs)/ + add to tab config
-- Modal screens: create in app/(modal)/
+## Navigation
+- Every page reachable from header nav. Login<->Signup cross-linked.
+- Layout at src/app/layout.tsx — UPDATE it, don't recreate.
+- Nav component at src/components/ui/nav.tsx — add links for new pages here.
 

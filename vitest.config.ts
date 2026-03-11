@@ -8,6 +8,10 @@ export default defineConfig({
     testTimeout: 10000,
   },
   resolve: {
-    alias: { "@": path.resolve(process.cwd(), "src") },
+    alias: {
+      "@": path.resolve(process.cwd(), "src"),
+      "react-native": path.resolve(process.cwd(), "src/__mocks__/react-native.ts"),
+      "expo-secure-store": path.resolve(process.cwd(), "src/__mocks__/expo-secure-store.ts"),
+    },
   },
 });

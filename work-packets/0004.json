@@ -1,0 +1,38 @@
+{
+  "id": "0004",
+  "title": "Repos: habits (upsert/list/count) + subscription (SecureStore)",
+  "epic": "Epic 1 (Data/Store)",
+  "task": {
+    "description": "Implement the core persistence APIs for habits in SQLite and subscription caching in SecureStore. All methods must return Result and never leak uncaught db/storage exceptions to callers.",
+    "acceptance_criteria": [
+      "AC1: upsertHabit(habit) inserts or updates by id and returns Result<null,RepoError> with ok=false on db failure.",
+      "AC2: getHabits({activeOnly:true}) returns only rows where isActive=1 mapped to Habit with booleans/numbers normalized.",
+      "AC3: countActiveHabits() returns a number equal to SELECT COUNT(*) WHERE isActive=1.",
+      "AC4: saveSubscription(sub) writes JSON to SecureStore under a single key; getSubscription() returns the parsed Subscription or Err on read/parse failure.",
+      "AC5: No method throws uncaught errors; all failures return Err({type:'db'|...})."
+    ]
+  },
+  "covers": [
+    "F1-AC2",
+    "F2-AC7",
+    "Profile-AC2"
+  ],
+  "files": [
+    "src/lib/db/repos/habitsRepo.ts",
+    "src/lib/db/repos/subscriptionRepo.ts",
+    "src/lib/db/repos/index.ts"
+  ],
+  "definition_of_done": [
+    "All SQL uses parameter binding (no string concat for values).",
+    "Repo methods are async and typed; no 'any'.",
+    "Indexes/exports updated in repos/index.ts."
+  ],
+  "depends_on": [
+    "0001",
+    "0003"
+  ],
+  "db_schema": "",
+  "api_contract": "",
+  "dependencies": [],
+  "ui_requirements": ""
+}

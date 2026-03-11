@@ -1,0 +1,35 @@
+{
+  "id": "0003",
+  "title": "SQLite client + migrations (schema init only)",
+  "epic": "Epic 1 (Data/Store)",
+  "task": {
+    "description": "Initialize expo-sqlite database access and implement schema creation for habits and checkins tables, including UNIQUE(habitId,date). This packet must only handle opening DB + creating tables; no CRUD helpers.",
+    "acceptance_criteria": [
+      "AC1: initDb() creates tables habits and checkins with columns exactly: habits(id TEXT PRIMARY KEY, title TEXT, createdAt TEXT, isActive INTEGER, currentStreak INTEGER, bestStreak INTEGER).",
+      "AC2: initDb() creates checkins(id TEXT PRIMARY KEY, habitId TEXT, date TEXT, checkedAt TEXT, isSynced INTEGER, UNIQUE(habitId, date)).",
+      "AC3: initDb() can be called twice without throwing and without changing table definitions (idempotent).",
+      "AC4: A helper getDb() returns an opened SQLite database instance used by repos.",
+      "AC5: App compiles on iOS and Android with Expo SDK 52 and strict TS."
+    ]
+  },
+  "covers": [
+    "F1-AC1"
+  ],
+  "files": [
+    "src/lib/db/client.ts",
+    "src/lib/db/migrations.ts",
+    "src/lib/db/index.ts"
+  ],
+  "definition_of_done": [
+    "No repository CRUD code exists in these files.",
+    "Schema SQL statements are centralized in migrations.ts.",
+    "Errors are surfaced as thrown errors from initDb (to be caught by callers)."
+  ],
+  "depends_on": [
+    "0001"
+  ],
+  "db_schema": "CREATE TABLE habits(id TEXT PRIMARY KEY, title TEXT, createdAt TEXT, isActive INTEGER, currentStreak INTEGER, bestStreak INTEGER);\nCREATE TABLE checkins(id TEXT PRIMARY KEY, habitId TEXT, date TEXT, checkedAt TEXT, isSynced INTEGER, UNIQUE(habitId, date));",
+  "api_contract": "",
+  "dependencies": [],
+  "ui_requirements": ""
+}

@@ -1,0 +1,36 @@
+{
+  "id": "0002",
+  "title": "Zustand app store (today, stats, subscription, onboarding selections)",
+  "epic": "Epic 1 (Data/Store)",
+  "task": {
+    "description": "Create a single zustand store holding today list state, stats state, subscription tier cache, and onboarding selected recommendation IDs. Expose typed actions for load, toggle, refresh flows; wire minimal state transitions without UI.",
+    "acceptance_criteria": [
+      "AC1: Store exports useAppStore with typed state for: todayItems, todayStatus, statsStatus, subscription, onboardingSelectedIds.",
+      "AC2: Actions exist with stable signatures: bootstrap(), loadToday(date), toggleToday(habitId,date), refreshAll(date) returning Promise<void>.",
+      "AC3: Store initializes subscription to {tier:'free', expiresAt:null} and lists to empty arrays without throwing.",
+      "AC4: No screen imports from repos directly are required to compile; screens can call store actions only.",
+      "AC5: App compiles with the new store and strict TS has 0 errors in the added/edited files."
+    ]
+  },
+  "covers": [
+    "F3-AC1",
+    "F4-AC1",
+    "Profile-AC1",
+    "Onboarding-AC1"
+  ],
+  "files": [
+    "src/store/appStore.ts",
+    "src/store/index.ts"
+  ],
+  "definition_of_done": [
+    "No async action throws uncaught errors (catch and store error string).",
+    "All state fields have explicit types; no implicit any."
+  ],
+  "depends_on": [
+    "0001"
+  ],
+  "db_schema": "",
+  "api_contract": "",
+  "dependencies": [],
+  "ui_requirements": ""
+}

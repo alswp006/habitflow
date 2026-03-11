@@ -1,0 +1,38 @@
+{
+  "id": "0001",
+  "title": "Core entity + UI view-model + Result/Error types",
+  "epic": "Epic 1 (Data/Store)",
+  "task": {
+    "description": "Add strict TS types for Habit, CheckIn, Subscription, HabitRecommendation plus Result/Ok/Err and repo/api error unions. Include Today + Stats view-model types so UI can consume typed data without casting.",
+    "acceptance_criteria": [
+      "AC1: src/lib/types/models.ts exports Habit, CheckIn, SubscriptionTier, Subscription, HabitRecommendation with fields/types exactly matching SPEC (incl. date formats as string).",
+      "AC2: src/lib/types/viewModels.ts exports TodayHabitItem, WeeklyDayStat, WeeklyHabitBreakdown, MonthlyDayStat, HabitPatternStat with no runtime code.",
+      "AC3: src/lib/types/result.ts exports Ok<T>, Err<E>, Result<T,E> as discriminated unions with an 'ok' boolean discriminator.",
+      "AC4: src/lib/types/errors.ts exports RepoError and ApiError unions including at least {type:'db'}, {type:'network'}, {type:'unknown'} shapes.",
+      "AC5: Running TypeScript in strict mode has 0 errors and no 'any' is introduced in these files."
+    ]
+  },
+  "covers": [
+    "F1-AC2",
+    "F1-AC5",
+    "F2-AC1",
+    "F3-AC1"
+  ],
+  "files": [
+    "src/lib/types/models.ts",
+    "src/lib/types/viewModels.ts",
+    "src/lib/types/result.ts",
+    "src/lib/types/errors.ts",
+    "src/lib/types/index.ts"
+  ],
+  "definition_of_done": [
+    "All exports are usedable by other modules without circular deps.",
+    "No React/Expo imports are added.",
+    "tsc strict passes."
+  ],
+  "depends_on": [],
+  "db_schema": "",
+  "api_contract": "",
+  "dependencies": [],
+  "ui_requirements": ""
+}
